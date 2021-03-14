@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Artikelliste</h1>
+      </div>
+    </div>
+  </section>
+  {% if articles_list %}
+
+    {% for article in articles_list %}
+<div class="album py-1 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1">
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="card-img-top" width="50" height="50"><text x="44%" y="50%" ><a href={{article.id}}>{{ article.article_name }}</a></text></svg>
+
+            </div>
+          </div>
+        </div>
+  </div>
+  </div>
+       </div>
+    {% endfor %}
+
+  {% else %}
+    <p>Es sind keine Artikel vorhanden.</p>
+  {% endif %} 
+{% endblock %}

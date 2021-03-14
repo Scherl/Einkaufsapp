@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Artikel: {{ article.article_name }}</h1>
+
+  <p><strong>Supermarkt:</strong> {{ article.supermarket }}</p> <!-- author detail link not yet defined -->
+  <p><strong>Bio:</strong> {{ article.bio }}</p>
+  <p><strong>Kategorie</strong> {{ article.category }}</p>
+  <p><strong>Artikel Preis:</strong> {{ article.article_price_original }} {{article.currency_original}}</p>
+  <p><strong>Artikel Preis in alternaiver Währung:</strong> {{ article.article_price_original }} {{article.currency_calculated}}</p>
+
+  </div>
+{% endblock %}
