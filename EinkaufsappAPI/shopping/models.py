@@ -11,3 +11,9 @@ class Shopping(models.Model):
     currency_calculated = models.CharField(max_length=5, blank=False, default='')
     bio = models.BooleanField(default=False)
     category = models.CharField(max_length=200, blank=False, default='')
+    brand_name = models.CharField(max_length=200, blank=False, default='')
+
+
+class Category(models.Model):
+    #id = models.IntegerField(blank=False, auto_created=True, primary_key=True)
+    category = models.CharField(max_length=200, blank=False, default='')

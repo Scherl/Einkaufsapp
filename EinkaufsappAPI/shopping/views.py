@@ -1,14 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http.response import JsonResponse, Http404
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from django.views import generic
-from .models import Shopping
+from .models import *
 from .serializers import ShoppingSerializer
 from rest_framework.decorators import api_view
 
-
-@api_view(['GET', 'POST'])
+"""@api_view(['GET', 'POST'])
 def article_list(request):
     # get list of articles, Post new articles
     if request.method == 'GET':
@@ -51,9 +50,11 @@ def article_detail(request, pk):
         article.delete()
         return JsonResponse({'message': 'Article was deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
+"""
+
 
 def index(request):
-    """View function for home page of site."""
+    # View function for home page of site.
     # Generate counts of some of the main objects
     num_articles = Shopping.objects.all().count()
     # Available bio articles
@@ -61,7 +62,7 @@ def index(request):
 
     context = {
         'num_articles': num_articles,
-        'num_instances': num_articles_bio,
+        'num_bio': num_articles_bio,
 
     }
     # Render the HTML template index.html with the data in the context variable
@@ -70,15 +71,16 @@ def index(request):
 
 class ArticlesListView(generic.ListView):
     model = Shopping
+    queryset = model.objects.order_by('article_name')
     context_object_name = 'articles_list'  # your own name for the list as a template variable
-    # queryset = Shopping.objects.filter(category__icontains='Wurst')[:5]  # Get 5 books containing the category Wurst
     template_name = 'shopping/templates/articles_list.html'  # Specify your own template name/location
 
 
 class ArticleDetailView(generic.DetailView):
     model = Shopping
     context_object_name = 'article'
-    def book_detail_view(request, primary_key):
+
+    def article_detail_view(request, primary_key):
         try:
             article = Shopping.objects.get(pk=primary_key)
             print(primary_key)
@@ -86,3 +88,23 @@ class ArticleDetailView(generic.DetailView):
             raise Http404('Article does not exist')
 
         return render(request, 'shopping/templates/article_detail.html', context={'article': article})
+
+
+class CategoryArticleList(generic.ListView):
+    template_name = 'shopping/templates/articles_by_category.html'
+    context_object_name = 'articles_by_category'
+
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, category=self.kwargs['category'])
+
+        return Shopping.objects.filter(category=self.category)
+
+    """def get_context_data(self,  **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in the category
+        context['category'] = self.category"""
+
+
+
+

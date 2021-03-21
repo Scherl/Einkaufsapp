@@ -3,14 +3,13 @@
 {% block content %}
 
 
-<h1 style="text-align: center; margin-top: 50px" >Artikelliste</h1>
+<h1 style="text-align: center; margin-top: 50px" >Artikelliste </h1>
 <br>
 <br>
-
 <br>
-  {% if articles_list %}
+  {% if articles_by_category %}
 <div class="card-deck" style="width: 60%; margin: auto;">
-  {% for article in articles_list %}
+  {% for article in articles_by_category %}
 <div class="card border-info mb-3" >
   <div class="card-body text-info" style="text-align: center">
  <div class="card-title"><a href={{article.id}}>{{ article.article_name }}</a></div>

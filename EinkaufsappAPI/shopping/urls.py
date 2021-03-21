@@ -8,5 +8,7 @@ urlpatterns = [
     path('articles/', views.ArticlesListView.as_view(template_name='articles_list.html'), name='articles_list'),
     path('articles/<int:pk>', views.ArticleDetailView.as_view(template_name='article_detail.html'),
          name='article_detail'),
+    path('articles/<category>/', views.CategoryArticleList.as_view(template_name='articles_by_category.html'),
+         name='articles_by_category')
 ]
 

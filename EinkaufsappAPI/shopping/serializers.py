@@ -6,12 +6,13 @@ class ShoppingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shopping
-        fields = ('id',
+        fields = ('_id',
                   'article_name',
                   'article_price_original',
                   'currency_original',
                   'supermarket',
                   'article_price_calculated',
                   'currency_calculated',
-                  'bio')
+                  'bio',
+                  'brand_name')
 
